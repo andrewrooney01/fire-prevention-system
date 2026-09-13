@@ -1,0 +1,8 @@
+#!/bin/sh
+# Install locally with: git config core.hooksPath .githooks
+set -eu
+if ! command -v gitleaks >/dev/null 2>&1; then
+  echo "Install Gitleaks before committing (macOS: brew install gitleaks)." >&2
+  exit 1
+fi
+exec gitleaks git . --pre-commit --staged --redact --ignore-gitleaks-allow
